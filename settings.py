@@ -1,5 +1,5 @@
-<<<<<<< current
 from pygame import display, time
+from math import pow
 
 
 # Class Coordinates for simplifiing workflow :-)
@@ -9,31 +9,11 @@ class Coordinates:
         self.y = y
 
 # Define some variables
-FPS = 60
+FPS = 120
 WIDTH = int(512 * 1.5)
 HEIGHT = int(512 * 1)
-START_POS = Coordinates(32, HEIGHT / 2)
+BORDER_SIZE_COUNT = 5
+BORDER_COUNT = int((WIDTH * HEIGHT) / pow(512, 2) * BORDER_SIZE_COUNT)
+RAYS_COUNT = 90
 screen = display.set_mode((WIDTH, HEIGHT))
 clock = time.Clock()
-
-# Define colors
-=======
-from pygame import display, time
-
-
-# Class Coordinates for simplifiing workflow :-)
-class Coordinates:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-# Define some variables
-FPS = 60
-WIDTH = int(512 * 1.5)
-HEIGHT = int(512 * 1)
-START_POS = Coordinates(32, HEIGHT / 2)
-screen = display.set_mode((WIDTH, HEIGHT))
-clock = time.Clock()
-
-# Define colors
->>>>>>> before discard

@@ -1,53 +1,37 @@
 import pygame as pg
 from settings import *
-from vector import *
-from colors import *
-clrs = Colors()
-
-vec1rot = 0
-vec2rot = 90
-
-vec1l = 100
-vec2l = 100
+from ray import *
+borders = []
+for b in range(BORDER_COUNT):
+    borders.append(Border())
+borders.append(Game_Border(Coordinates(0, 0), Coordinates(WIDTH, 0)))
+borders.append(Game_Border(Coordinates(0, 0), Coordinates(0, HEIGHT)))
+borders.append(Game_Border(Coordinates(WIDTH, 0), Coordinates(WIDTH, HEIGHT)))
+borders.append(Game_Border(Coordinates(0, HEIGHT), Coordinates(WIDTH, HEIGHT)))
 
 
 while True:
     clock.tick(FPS)
+    pg.display.set_caption("{:.2f}".format(clock.get_fps()))
     for e in pg.event.get():
         if e.type == pg.QUIT:
+            print('Good bye.')
             exit()
 
     keys = pg.key.get_pressed()
-    if keys[pg.K_UP]:
-        vec2rot += 1
-    if keys[pg.K_DOWN]:
-        vec2rot -= 1
-    if keys[pg.K_RIGHT]:
-        vec2l += 1
-    if keys[pg.K_LEFT]:
-        vec2l -= 1
+    if keys[pg.K_ESCAPE]:
+        print('Good bye.')
+        exit()
 
-    if keys[pg.K_w]:
-        vec1rot += 1
-    if keys[pg.K_s]:
-        vec1rot -= 1
-    if keys[pg.K_d]:
-        vec1l += 1
-    if keys[pg.K_a]:
-        vec1l -= 1
+    x, y = pg.mouse.get_pos()[0], pg.mouse.get_pos()[1]
+    rays = []
+    for dir in range(RAYS_COUNT):
+        rays.append(Ray(dir * (360 / RAYS_COUNT), borders, Coordinates(x, y)))
 
-    if vec2rot > 360: vec2rot -= 360
-    if vec2rot < 0: vec2rot += 360
-
-    screen.fill(clrs.DARK_GREY)
-    vec1 = Vector(vec(vec1l, 0).rotate(-vec1rot), clrs.RED, START_POS)
-    vec2 = Vector(vec(vec2l, 0).rotate(-vec2rot),  clrs.BLUE, START_POS)
-    # vec3 = Vector(vec(200, 0).rotate(-90), clrs.YELLOW, START_POS)
-    last_vec = Vector(vec1.v + vec2.v,  clrs.GREEN, START_POS)
-
-    vec1.draw(screen)
-    vec2.draw(screen)
-    # vec3.draw(screen)
-    last_vec.draw(screen)
+    screen.fill((32, 32, 32))
+    for b in borders:
+        b.draw(screen)
+    for r in rays:
+        r.draw(screen)
 
     pg.display.flip()
