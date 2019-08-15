@@ -16,12 +16,14 @@ while True:
     for e in pg.event.get():
         if e.type == pg.QUIT:
             print('Good bye.')
-            exit()
+            pg.quit()
+            quit()
 
     keys = pg.key.get_pressed()
     if keys[pg.K_ESCAPE]:
         print('Good bye.')
-        exit()
+        pg.quit()
+        quit()
 
     x, y = pg.mouse.get_pos()[0], pg.mouse.get_pos()[1]
     rays = []

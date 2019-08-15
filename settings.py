@@ -12,8 +12,8 @@ class Coordinates:
 FPS = 120
 WIDTH = int(512 * 1.5)
 HEIGHT = int(512 * 1)
-BORDER_SIZE_COUNT = 5
+BORDER_SIZE_COUNT = 15
 BORDER_COUNT = int((WIDTH * HEIGHT) / pow(512, 2) * BORDER_SIZE_COUNT)
-RAYS_COUNT = 90
+RAYS_COUNT = 360
 screen = display.set_mode((WIDTH, HEIGHT))
 clock = time.Clock()
